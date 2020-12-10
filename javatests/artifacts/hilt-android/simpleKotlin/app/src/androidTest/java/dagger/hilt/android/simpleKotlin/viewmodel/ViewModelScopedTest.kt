@@ -86,6 +86,8 @@ class ViewModelScopedTest {
   @AndroidEntryPoint
   class TestFragment : Fragment() {
     val vm by viewModels<TestViewModel>()
+
+    @Inject lateinit var fooViewModel: TestOtherViewModel
   }
 
   @HiltViewModel
@@ -93,6 +95,9 @@ class ViewModelScopedTest {
     val one: DependsOnBarOne,
     val two: DependsOnBarTwo
   ) : ViewModel()
+
+  @HiltViewModel
+  class TestOtherViewModel @Inject constructor() : ViewModel()
 
   class DependsOnBarOne @Inject constructor(val bar: Bar)
   class DependsOnBarTwo @Inject constructor(val bar: Bar)
